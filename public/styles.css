@@ -1,0 +1,74 @@
+html {
+  background-color: #242424;
+  color-scheme: dark;
+  min-height: 100vh;
+}
+
+body {
+  margin: 1.5rem 1rem 1rem;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+h1 {
+  margin: 0 0 2rem;
+  font-size: 3.2rem;
+  font-weight: 700;
+  line-height: 1.1;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.scrollArea {
+  position: relative;
+  margin: 0 auto;
+  padding-right: 28px;
+  max-width: 520px;
+  height: calc(100vh - 2rem - 0.5rem);
+  overflow-y: clip;
+}
+.scrollArea .content {
+  display: block;
+  padding-bottom: 0.5rem;
+  transition: transform 0.1s linear;
+}
+
+.scrollArea .scrollbar {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 3px;
+  height: 100%;
+  background-color: #363636;
+}
+.scrollArea .scrollbar .thumb {
+  all: unset;
+  position: absolute;
+  width: 20px;
+  height: 48px;
+  border-radius: 8px;
+  background-color: #363636;
+  cursor: pointer;
+  transition: transform 0.1s linear;
+  user-select: none;
+  touch-action: none;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    min-width: 44px;
+    min-height: 44px;
+  }
+}
+
