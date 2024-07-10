@@ -1,4 +1,3 @@
-// import debounce from "./debounce";
 function debounce (func, delay) {
   let timeoutId;
   return function (...args) {
@@ -78,14 +77,7 @@ document.addEventListener("mousemove", (e) => {
 
 document.addEventListener("mouseup", () => { isDragging = false });
 
-// Handles arrow keys.
-thumb.addEventListener("keydown", (e) => {
-  if (document.activeElement === thumb) {
-    e.preventDefault();
-    let scrollAmount = (content.scrollHeight - scrollArea.clientHeight) / 20;
-    updateContentPosition(e.key === "ArrowUp" ? -scrollAmount : scrollAmount);
-  }
-});
+// TODO: arrow keys.
 
 // Handles scroll wheel.
 scrollArea.addEventListener("wheel", (e) => {
