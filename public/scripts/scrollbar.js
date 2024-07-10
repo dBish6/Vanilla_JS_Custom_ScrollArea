@@ -1,3 +1,4 @@
+// import debounce from "./debounce";
 function debounce (func, delay) {
   let timeoutId;
   return function (...args) {
@@ -13,7 +14,8 @@ const scrollbar = scrollArea.querySelector(".scrollbar"),
   thumb = scrollbar.querySelector(".thumb");
 
 let isDragging = false,
-  startY;
+  startY,
+  startThumbY;
 
 /**
  * Calculates the initial thumb height based on content overflow. 
@@ -75,6 +77,15 @@ document.addEventListener("mousemove", (e) => {
 });
 
 document.addEventListener("mouseup", () => { isDragging = false });
+
+// Handles arrow keys.
+thumb.addEventListener("keydown", (e) => {
+  if (document.activeElement === thumb) {
+    e.preventDefault();
+    let scrollAmount = (content.scrollHeight - scrollArea.clientHeight) / 20;
+    updateContentPosition(e.key === "ArrowUp" ? -scrollAmount : scrollAmount);
+  }
+});
 
 // Handles scroll wheel.
 scrollArea.addEventListener("wheel", (e) => {
