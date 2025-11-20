@@ -1,3 +1,4 @@
+// import debounce from "./debounce";
 function debounce (func, delay) {
   let timeoutId;
   return function (...args) {
@@ -25,6 +26,9 @@ function initializeThumbHeight() {
   const contentOverflow = content.scrollHeight - scrollArea.clientHeight,
     overflowRatio = contentOverflow / content.scrollHeight,
     thumbHeight = `${100 - overflowRatio * 100}%`;
+
+  // TODO: We actually need to disable everything for this, like the listeners. 
+  if (contentOverflow <= 5) scrollbar.style.display = "none";
 
   thumb.style.height = thumbHeight;
 }
@@ -77,7 +81,15 @@ document.addEventListener("mousemove", (e) => {
 
 document.addEventListener("mouseup", () => { isDragging = false });
 
-// TODO: arrow keys.
+// FIXME: Handles arrow keys.
+thumb.addEventListener("keydown", (e) => {
+  // This should be on the scrollArea.
+  if (document.activeElement === thumb) {
+    e.preventDefault();
+    let scrollAmount = (content.scrollHeight - scrollArea.clientHeight) / 20;
+    updateContentPosition(e.key === "ArrowUp" ? -scrollAmount : scrollAmount);
+  }
+});
 
 // Handles scroll wheel.
 scrollArea.addEventListener("wheel", (e) => {
